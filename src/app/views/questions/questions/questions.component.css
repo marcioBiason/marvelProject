@@ -1,0 +1,27 @@
+.main {
+  margin: 0px;
+  padding: 20px;
+  font-family: Arial;
+  background-color: rgba(16, 17, 16, 0.788);
+}
+
+h1 {
+  margin: 0px;
+  text-align: center;
+  background-color: rgba(140, 148, 140, 0.788);
+}
+
+h2 {
+  margin: 50px;
+  text-align: center;
+  font-size: 32px;
+  text-decoration: underline;
+  color: rgba(140, 148, 140, 0.788);
+}
+
+p {
+    margin: 20px;
+    text-align: center;
+    font-size: 26px;
+    color: rgba(140, 148, 140, 0.788);
+}

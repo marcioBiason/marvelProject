@@ -1,0 +1,30 @@
+<div class="main" *ngIf="heroes">
+  <div class="search">
+    <input class="form-control mb-4" [(ngModel)]="search" (ngModelChange)="this.searchSubject.next($event)" type="text"
+      placeholder="Pesquisar">
+  </div>
+  <div>
+    <h2 class='favorites'> Favoritos </h2>
+    <div class="box-hero-favorite-grid">
+      <div class="box-hero-favorite" *ngFor="let hero of favoriteHeroes">
+        <img [routerLink]="['/detail/', hero.id]" [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension"
+          [alt]="hero.name">
+        <p class="nameFavoriteHero"> {{ hero.name }} </p>
+      </div>
+    </div>
+  </div>
+  <div class="not-found" *ngIf="heroes.length == 0 && !loading">
+    Nenhum herói encontrado
+  </div>
+  <div class="box-hero-grid">
+    <div class="box-hero" *ngFor="let hero of heroes">
+      <img [routerLink]="['/detail/', hero.id]" [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension"
+        [alt]="hero.name">
+      <p class="nameHero"> {{ hero.name }} </p>
+      <a class="deleteIcon" (click)="deleteHero(hero)"> Deletar heroi <i class="bi bi-trash2-fill"></i></a>
+    </div>
+  </div>
+  <app-loading [loading]="loading"></app-loading>
+  <a class="loadMore" *ngIf="total >= 20" (click)="getListHeroes(1)"> Carregar mais herois <i
+      class="bi bi-plus-square"></i></a>
+</div>

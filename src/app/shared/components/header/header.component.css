@@ -1,0 +1,17 @@
+.header{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 5px;
+  margin: 0px;
+  background: rgba(226, 40, 40, 0.945);
+}
+
+img{
+  grid-column: 2/ 5;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+img:hover {
+  opacity: 0.9;
+}
