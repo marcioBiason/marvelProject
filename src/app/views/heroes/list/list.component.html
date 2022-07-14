@@ -3,7 +3,7 @@
     <input class="form-control mb-4" [(ngModel)]="search" (ngModelChange)="this.searchSubject.next($event)" type="text"
       placeholder="Pesquisar">
   </div>
-  <div *ngIf="showFavorites">
+  <div class="box-favorite" *ngIf="showFavorites">
     <h2 class='favorites'> Meus favoritos </h2>
     <div class="box-hero-favorite-grid">
       <div class="box-hero-favorite" *ngFor="let hero of favoriteHeroes">
