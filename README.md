@@ -1,27 +1,33 @@
 # marvelProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.3.
+- Projeto desenvolvido em Angular versão 13.1.3. [Angular CLI](https://github.com/angular/angular-cli).
 
-## Development server
+- Projeto desenvolvido utilizando API Marvel: `https://developer.marvel.com`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Projeto desenvolvido especialmente para a General Claims.
 
-## Code scaffolding
+## Rodando o projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Após o clone do repositório: `npm i` para instalar as dependências 
+`ng s -o`. 
+O projeto ira carregar.
 
-## Build
+## Projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Foi desenvolvida uma galeria com os heróis presentes na API Marvel.
 
-## Running unit tests
+Onde é possível pesquisar heóis.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Favoritar heróis
 
-## Running end-to-end tests
+Deletar heróis
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Questões
 
-## Further help
+Foi criado um easter egg para redirecionar para as questões presentes no .txt, basta ser digitada a palavra 'perguntas' na barra de pesquisa da galeria.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Caso não consiga acessar, essa é a rota: `localhost:{port}/questions`
+
+## Autor
+
+Marcio Biason Perdiz

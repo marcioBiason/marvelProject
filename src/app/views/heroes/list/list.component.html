@@ -3,8 +3,8 @@
     <input class="form-control mb-4" [(ngModel)]="search" (ngModelChange)="this.searchSubject.next($event)" type="text"
       placeholder="Pesquisar">
   </div>
-  <div>
-    <h2 class='favorites'> Favoritos </h2>
+  <div *ngIf="showFavorites">
+    <h2 class='favorites'> Meus favoritos </h2>
     <div class="box-hero-favorite-grid">
       <div class="box-hero-favorite" *ngFor="let hero of favoriteHeroes">
         <img [routerLink]="['/detail/', hero.id]" [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension"
@@ -25,6 +25,20 @@
     </div>
   </div>
   <app-loading [loading]="loading"></app-loading>
-  <a class="loadMore" *ngIf="total >= 20" (click)="getListHeroes(1)"> Carregar mais herois <i
-      class="bi bi-plus-square"></i></a>
+  <app-button *ngIf="total >= 20" icon="bi bi-plus-square" text="Carregar mais herois" (click)="getMoreHeroes()"></app-button>
 </div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is example from ItSolutionStuff.com
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>

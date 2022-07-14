@@ -24,15 +24,15 @@ img:hover {
   margin: 0px;
   text-align: center;
   font-size: 18px;
-  color: white;
+  color: rgba(255, 255, 255, 0.918);
   grid-column: 1/-1;
 }
 
 .nameFavoriteHero {
   margin: 0px;
   text-align: center;
-  font-size: 18px;
-  color: rgba(61, 61, 61, 0.842);
+  font-size: 22px;
+  color: rgba(197, 192, 192, 0.842);
   grid-column: 1/-1;
 }
 
@@ -47,7 +47,7 @@ img:hover {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
-  margin: 0px 20px;
+  margin: 10px 20px;
   justify-content: center;
 }
 
@@ -62,8 +62,9 @@ img:hover {
 .favorites {
   margin: 0px 20px;
   padding: 20px 20px;
-  background: rgba(240, 240, 240, 0.842);
-  color: rgba(61, 61, 61, 0.842);
+  background: rgba(133, 132, 132, 0.993);
+  color: rgba(197, 192, 192, 0.842);
+  font-size: 28px;
 }
 
 .box-hero-favorite-grid {
@@ -72,7 +73,7 @@ img:hover {
   gap: 20px;
   margin: 0px 20px;
   justify-content: center;
-  background: rgba(240, 240, 240, 0.842);
+  background: rgba(133, 132, 132, 0.993);
 }
 
 .box-hero-favorite {
@@ -80,7 +81,7 @@ img:hover {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   place-items: center;
-  background: rgba(211, 210, 210, 0.842);
+  background: rgba(133, 132, 132, 0.993);
 }
 
 .deleteIcon {
@@ -91,8 +92,8 @@ img:hover {
   border-radius: 5px;
 }
 
-a:hover {
-  opacity: 0.8;
+.deleteIcon:hover{
+  opacity: .8;
 }
 
 a {
@@ -111,18 +112,4 @@ a {
   padding: 50px 50px;
   font-size: 20px;
   text-align: center;
-}
-
-.loadMore {
-  display: block;
-  cursor: pointer;
-  text-align: center;
-  background: rgba(129, 129, 129, 0.699);
-  color: rgba(255, 255, 255, 0.986);
-  border: solid 4px rgb(75, 73, 73);
-  text-decoration: none;
-  padding: 10px 20px;
-  margin: 0px 50px;
-  font-size: 20px;
-  border-radius: 5px;
 }

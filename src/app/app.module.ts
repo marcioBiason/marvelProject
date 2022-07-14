@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HeaderModule } from './shared/components/header/header.module';
-import { LoadingModule } from './shared/components/loading/loading.module';
 import { HeroesModule } from './views/heroes/heroes.module';
 import { QuestionsModule } from './views/questions/questions.module';
 
@@ -19,12 +18,8 @@ import { QuestionsModule } from './views/questions/questions.module';
     HttpClientModule,
     AppRoutingModule,
     HeaderModule,
-    LoadingModule,
     HeroesModule,
     QuestionsModule
-  ],
-  exports: [
-    LoadingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

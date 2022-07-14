@@ -1,5 +1,8 @@
 <div class="main">
   <app-loading [loading]="loading"></app-loading>
+  <div class="error"  *ngIf="!hero && !loading">
+    Ocorreu um erro. Favor tentar novamente mais tarde
+  </div>
   <div *ngIf="hero">
     <div class="box-hero">
       <img [src]="hero.thumbnail?.path + '.' + hero.thumbnail?.extension" [alt]="hero.name">
@@ -20,11 +23,11 @@
         <h2 class="item-hero"> {{ event.name }} </h2>
       </div>
     </div>
-    <div *ngIf="false" class="alert alert-warning alert-dismissible notification">
+    <div *ngIf="failed" class="alert alert-warning alert-dismissible notification">
       <a class="close" data-dismiss="alert" aria-label="close"> </a>
       <strong>Erro!</strong> Você já adicionou 5 heróis a seus favoritos.
     </div>
-    <a class="favorite" (click)="addOrRemoveFavoriteHero(hero)"> {{ isFavorite() }} <i class="bi bi-star-fill"></i> </a>
-    <a class="favorite" [routerLink]="['']"> Voltar a galeria <i class="bi bi-house-door-fill"></i> </a>
+    <app-button [text]="isFavorite()" (click)="addOrRemoveFavoriteHero(hero)"></app-button>
+    <app-button text="Voltar a galeria" (click)="backTogallery()"></app-button>
   </div>
 </div>

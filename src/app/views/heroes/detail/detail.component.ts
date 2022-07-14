@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Hero } from '../model/heroes.model';
 import { HeroesService } from '../services/heroes.service';
 
@@ -10,11 +10,13 @@ import { HeroesService } from '../services/heroes.service';
 })
 export class DetailComponent implements OnInit {
   public loading: boolean = false;
+  public failed: boolean = false;
   public hero: Hero;
   private result: boolean;
 
   constructor(private _heroesService: HeroesService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.loading = true;
@@ -34,15 +36,24 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  isFavorite() {
+  public isFavorite() {
     if (this.result) {
       return 'Remover dos favoritos'
     } return 'Adicionar aos favoritos'
   }
 
-  addOrRemoveFavoriteHero(hero: Hero) {
+  public addOrRemoveFavoriteHero(hero: Hero) {
     if (this.result) {
       this._heroesService.removeToFavorite(hero);
-    } this._heroesService.addToFavorite(hero);
+      this.backTogallery();
+    } else {
+      if (this._heroesService.addToFavorite(hero) === 'sucess') {
+        this.backTogallery();
+      } this.failed = true
+    }
+  }
+
+  public backTogallery() {
+    this.router.navigateByUrl('');
   }
 }

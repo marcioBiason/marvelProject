@@ -1,0 +1,17 @@
+.loadMore {
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  background: rgba(129, 129, 129, 0.699);
+  color: rgba(255, 255, 255, 0.986);
+  border: solid 4px rgb(75, 73, 73);
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0px 50px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.loadMore:hover {
+  opacity: 0.8;
+}

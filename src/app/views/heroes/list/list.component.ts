@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, filter, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Subject, switchMap } from 'rxjs';
 import { Hero } from '../model/heroes.model';
 import { HeroesService } from '../services/heroes.service';
 
@@ -10,12 +10,13 @@ import { HeroesService } from '../services/heroes.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  public favoriteHeroes;
-  public deletedHeroes;
+  private offset: number = 0;
+  private deletedHeroes: Hero[] = [];
+  public favoriteHeroes: Hero[] = [];
   public heroes: Hero[] = [];
-  public offset: number = 0;
   public total: number = 0;
-  public loading = false;
+  public loading: boolean = false;
+  public showFavorites: boolean = false;
   public search: string = '';
   public searchSubject = new Subject<string>();
 
@@ -26,26 +27,25 @@ export class ListComponent implements OnInit {
     this.searchSubject
       .pipe(
         map(value => value.trim()),
-        debounceTime(1000),
+        debounceTime(500),
         distinctUntilChanged(),
         switchMap(value => this.getHeroesSearch(value)),
       ).subscribe();
 
-    this.favoriteHeroes = JSON.parse(localStorage.getItem('favorites'));
-    this.deletedHeroes = JSON.parse(localStorage.getItem('deleted'));
-
-    this.getListHeroes(this.offset)
+    this.verifyFavorites();
+    this.verifyDeleted();
+    this.getListHeroes()
   }
 
-  getListHeroes(offset: number) {
+  public getListHeroes() {
     this.loading = true;
     this._heroesService.getHeroes({ offset: this.offset }).subscribe({
       next: hero => {
         this.heroes.push(...hero.data['results']);
         this.total = hero.data['total'];
+        this.verifyFavorites();
+        this.verifyDeleted();
         this.loading = false;
-        this.heroes = this._heroesService.compareDiff(this.favoriteHeroes, this.heroes);
-        this.heroes = this._heroesService.compareDiff(this.deletedHeroes, this.heroes);
       },
       error: () => {
         this.loading = false;
@@ -54,26 +54,58 @@ export class ListComponent implements OnInit {
     this.offset = this.offset + 20;
   }
 
-  async getHeroesSearch(heroeName: string) {
+  private searchHeroes(heroeName: string) {
     this.loading = true;
+    this._heroesService.getHeroeByName({ name: heroeName, offset: this.offset }).subscribe({
+      next: async hero => {
+        this.heroes.push(...hero.data['results']);
+        this.total = hero.data['total'];
+        this.verifyFavorites();
+        this.verifyDeleted();
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+    this.offset = this.offset + 20;
+  }
+
+  private async getHeroesSearch(heroeName: string) {
+    this.resetHeroes();
     if (heroeName === "perguntas") {
       this.router.navigateByUrl('/questions');
     } else if (heroeName != '') {
-      this._heroesService.getHeroeByName(heroeName).subscribe({
-        next: hero => {
-          this.heroes = hero.data['results'];
-          this.total = hero.data['total'];
-          this.loading = false;
-        },
-        error: () => {
-          this.loading = false;
-        }
-      });
+      this.searchHeroes(heroeName);
     } else {
-      this.heroes = [];
-      this.offset = 0;
-      this.getListHeroes(this.offset);
+      this.getListHeroes();
     }
+  }
+
+  public getMoreHeroes() {
+    if (this.search) {
+      this.searchHeroes(this.search);
+    } else {
+      this.getListHeroes();
+    }
+  }
+
+  private verifyFavorites() {
+    this.favoriteHeroes = JSON.parse(localStorage.getItem('favorites'));
+    if (this.favoriteHeroes) {
+      if (this.favoriteHeroes.length > 0) { this.showFavorites = true }
+      this.heroes = this._heroesService.compareDiff(this.favoriteHeroes, this.heroes);
+    }
+  }
+
+  private verifyDeleted() {
+    this.deletedHeroes = JSON.parse(localStorage.getItem('deleted'));
+    this.heroes = this._heroesService.compareDiff(this.deletedHeroes, this.heroes);
+  }
+
+  private resetHeroes() {
+    this.heroes = [];
+    this.offset = 0;
   }
 
   public deleteHero(hero: Hero) {

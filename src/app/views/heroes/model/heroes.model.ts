@@ -29,5 +29,6 @@ export interface DataHero {
 
 export interface ParamsHero {
   id?: number;
+  name?: string,
   offset?: number;
 }
