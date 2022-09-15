@@ -4,8 +4,6 @@
 
 - Projeto desenvolvido utilizando API Marvel: `https://developer.marvel.com`.
 
-- Projeto desenvolvido especialmente para a General Claims.
-
 ## Rodando o projeto
 
 Após o clone do repositório: `npm i` para instalar as dependências 
